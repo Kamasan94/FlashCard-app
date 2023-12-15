@@ -1,0 +1,23 @@
+{% extends "cards/base.html" %}
+
+{% block content %}
+    {% if card %}
+    <h2>✏️ Edit Card</h2>
+    {% else %}
+    <h2>✨ Create New Card</h2>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save Card">
+    </form>
+    <a href="{% url 'card-archive' card.id %}">
+        <input type="button" value="Archive"/>
+    </a>
+    <a href="{% url 'card-delete' card.id %}">
+        <input type="button" value="Delete" style="background-color: red; border-color: red;"/>
+    </a>
+    <a href="{% url 'card-list' %}">
+        Cancel
+    </a>
+{% endblock %}
